@@ -98,11 +98,12 @@ abstract class HyperRoute<T extends RouteValue> {
     return null;
   }
 
+  /// Performs depth-first traversal and applies `action` to each child on the way
   void forEach(void Function(HyperRoute r) action) {
-    action(this);
     for (final child in children) {
       child.forEach(action);
     }
+    action(this);
   }
 
   /// Creates a stack of [RouteNode]s from this route to the root.
