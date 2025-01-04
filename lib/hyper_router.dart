@@ -1,4 +1,4 @@
-library hyper_router;
+library;
 
 export 'package:hyper_router/srs/route/named_route.dart';
 export 'package:hyper_router/srs/base/hyper_router.dart';

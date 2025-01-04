@@ -71,16 +71,6 @@ class ShellValue extends RouteValue {
 
   @override
   String toString() {
-    final stacks = [
-      for (final tab in tabNodes)
-        () {
-          final stack = [];
-          tab.forEach((node) {
-            stack.add(node.value.toString());
-          });
-          return stack;
-        }(),
-    ];
-    return 'ShellValue(tabIndex: $tabIndex, tabStacks: $stacks)';
+    return 'ShellValue(tabIndex: $tabIndex, tabStacks: $tabNodes)';
   }
 }

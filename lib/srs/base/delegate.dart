@@ -40,6 +40,7 @@ class HyperRouterDelegate extends RouterDelegate<RouteNode>
               pages: rootController.stack.createPages(context).toList(),
               key: rootController.rootNavigatorNode.key,
               // TODO: https://github.com/flutter/flutter/issues/153122
+              // ignore: deprecated_member_use
               onPopPage: (route, result) {
                 rootController.popRoute(result);
                 return false;
