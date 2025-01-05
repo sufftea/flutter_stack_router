@@ -47,7 +47,7 @@ class MainApp extends StatelessWidget {
     return theme.copyWith(
       cardTheme: CardTheme(
         margin: const EdgeInsets.all(8),
-        color: theme.colorScheme.surfaceVariant,
+        color: theme.colorScheme.surfaceContainerHighest,
         clipBehavior: Clip.antiAlias,
         elevation: 0,
         shape: RoundedRectangleBorder(

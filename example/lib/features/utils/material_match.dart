@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-MaterialStateProperty<T> materialMatch<T>({
+WidgetStateProperty<T> materialMatch<T>({
   required T all,
   T? hovered,
   T? pressed,
 }) {
-  return MaterialStateProperty.resolveWith(
+  return WidgetStateProperty.resolveWith(
     (states) {
-      if (hovered != null && states.contains(MaterialState.hovered)) {
+      if (hovered != null && states.contains(WidgetState.hovered)) {
         return hovered;
-      } else if (pressed != null && states.contains(MaterialState.pressed)) {
+      } else if (pressed != null && states.contains(WidgetState.pressed)) {
         return pressed;
       }
       return all;

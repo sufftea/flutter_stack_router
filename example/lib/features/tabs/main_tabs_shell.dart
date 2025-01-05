@@ -83,7 +83,7 @@ class _ShellWithNavRail extends StatelessWidget {
             child: child,
           ),
           NavigationRail(
-            backgroundColor: col.surfaceVariant,
+            backgroundColor: col.surfaceContainerHighest,
             selectedIndex: controller.tabIndex,
             onDestinationSelected: (index) {
               tabs[index].onClick(context);
