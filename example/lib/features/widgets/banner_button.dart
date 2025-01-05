@@ -23,11 +23,11 @@ class VerticalBannerButton extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-          shape: MaterialStatePropertyAll(
+          padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+          shape: WidgetStatePropertyAll(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(32))),
           backgroundColor: materialMatch(
-            all: context.col.surfaceVariant,
+            all: context.col.surfaceContainerHighest,
             hovered: context.col.secondaryContainer,
           ),
           foregroundColor: materialMatch(all: context.col.onSurfaceVariant),
@@ -95,11 +95,11 @@ class HorizontalBannerButton extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-          shape: MaterialStatePropertyAll(
+          padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+          shape: WidgetStatePropertyAll(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(32))),
           backgroundColor: materialMatch(
-            all: context.col.surfaceVariant,
+            all: context.col.surfaceContainerHighest,
             hovered: context.col.secondaryContainer,
           ),
           foregroundColor: materialMatch(all: context.col.onSurfaceVariant),

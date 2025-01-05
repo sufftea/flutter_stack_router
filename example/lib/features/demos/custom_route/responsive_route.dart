@@ -49,7 +49,7 @@ class ResponsiveNode extends NamedNode {
       _ => [
           MaterialPage(
             child: Container(
-              color: context.col.background,
+              color: context.col.surface,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -58,7 +58,7 @@ class ResponsiveNode extends NamedNode {
                     child: buildScreen(context),
                   ),
                   VerticalDivider(
-                    color: context.col.onBackground,
+                    color: context.col.onSurface,
                     thickness: 0.5,
                   ),
                   Expanded(
