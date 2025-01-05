@@ -1,23 +1,31 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:hyper_router/srs/base/exceptions.dart';
 import 'package:hyper_router/srs/route/hyper_route.dart';
 import 'package:hyper_router/srs/url/url_data.dart';
 import 'package:hyper_router/srs/value/route_key.dart';
 import 'package:hyper_router/srs/value/route_value.dart';
 
+/// {@template shell_covering_route}
 /// The routes located below this one in the routing tree will be displayed on
 /// top (rather than inside the nested navigator) of the [ShellRoute]  with the
 /// corresponding [shellKey].
 ///
 /// This is a "proxy" route: it doesn't have a page of its own and you can't
 /// navigate to it directly. Must contain at least one child.
+/// {@endtemplate}
 class ShellCoveringRoute extends HyperRoute {
+  /// {@macro shell_covering_route}
   ShellCoveringRoute({
     required this.shellKey,
     required super.children,
-  }) : assert(children.isNotEmpty,
-            "[ShellCoveringRoute] serves as a proxy for its children and can't be displayed on its own. Provide at least one child");
+    @visibleForTesting RouteKey? key,
+  })  : key = key ?? RouteKey(),
+        assert(
+          children.isNotEmpty,
+          "[ShellCoveringRoute] serves as a proxy for its children and can't be displayed on its own. Provide at least one child",
+        );
 
   /// The key of the [ShellRoute] that this route and its children should cover.
   final RouteKey shellKey;
@@ -28,9 +36,15 @@ class ShellCoveringRoute extends HyperRoute {
     RouteValue? value,
     Completer? popCompleter,
   }) {
+    if (next == null) {
+      throw HyperError(
+        "Attempt to navigate to [ShellCoveringNode] directly.",
+      );
+    }
+
     return ShellCoveringNode(
       shellKey: shellKey,
-      next: next ?? children.first.createNode(),
+      next: next,
       value: ShellCoveringRouteValue(key),
       route: this,
       popCompleter: popCompleter,
@@ -51,7 +65,7 @@ class ShellCoveringRoute extends HyperRoute {
   }
 
   @override
-  final RouteKey key = RouteKey();
+  final RouteKey key;
 }
 
 class ShellCoveringNode extends RouteNode<ShellCoveringRouteValue> {

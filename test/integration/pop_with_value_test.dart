@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'base/screens/home_screen.dart';
 import 'package:hyper_router/hyper_router.dart';
+
+import 'base/screens/home_screen.dart';
 
 void main() async {
   testWidgets(

@@ -87,6 +87,11 @@ class ShellNode extends RouteNode<ShellValue> {
   UrlData toUrl() {
     return next.toUrl();
   }
+
+  @override
+  String toString() {
+    return "$runtimeType(value: $value, next: $next)";
+  }
 }
 
 bool _isShellCovering(RouteNode node, RouteKey key) {

@@ -98,16 +98,19 @@ abstract class HyperRoute<T extends RouteValue> {
     return null;
   }
 
+  /// Performs depth-first traversal and applies `action` to each child on the way
   void forEach(void Function(HyperRoute r) action) {
-    action(this);
     for (final child in children) {
       child.forEach(action);
     }
+    action(this);
   }
 
   /// Creates a stack of [RouteNode]s from this route to the root.
   RouteNode? createStack({
     RouteNode? next,
+
+    /// Route key to route value;
     required Map<Object, RouteValue> values,
     Map<Object, Completer> popCompleters = const {},
   }) {
@@ -236,10 +239,7 @@ abstract class RouteNode<T extends RouteValue> {
   }
 
   @override
-  bool operator ==(Object other) {
-    return other is RouteNode && other.hashCode == this.hashCode;
+  String toString() {
+    return "$runtimeType(value: $value, next: $next)";
   }
-
-  @override
-  int get hashCode => super.hashCode + next.hashCode;
 }

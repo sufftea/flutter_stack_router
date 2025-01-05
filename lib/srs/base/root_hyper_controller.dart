@@ -85,26 +85,42 @@ class RootHyperController extends ChangeNotifier implements HyperController {
           "Route tree doesn't contain route with the provided key: ${target.key}");
     }
 
-    final valuesMap = <Object, RouteValue>{};
-
-    _stack?.forEach((builder) {
-      valuesMap[builder.value.key] = builder.value;
+    final valuesMap = getCurrentValues(combineWith: {
+      target,
+      ...values,
     });
-    valuesMap[target.key] = target;
-    valuesMap.addAll(Map.fromIterable(
-      values,
-      key: (element) => element.key,
-    ));
 
-    final popCompleters = <Object, Completer>{};
-    _stack?.forEach((node) {
-      popCompleters[node.key] = node.popCompleter;
-    });
+    final popCompleters = getCurrentCompleters();
 
     return targetRoute.createStack(
       values: valuesMap,
       popCompleters: popCompleters,
     )!;
+  }
+
+  Map<Object, Completer> getCurrentCompleters() {
+    final popCompleters = <Object, Completer>{};
+    _stack?.forEach((node) {
+      popCompleters[node.key] = node.popCompleter;
+    });
+
+    return popCompleters;
+  }
+
+  Map<Object, RouteValue> getCurrentValues({
+    Set<RouteValue> combineWith = const {},
+  }) {
+    final valuesMap = <Object, RouteValue>{};
+
+    _stack?.forEach((builder) {
+      valuesMap[builder.value.key] = builder.value;
+    });
+    valuesMap.addAll(Map.fromIterable(
+      combineWith,
+      key: (element) => element.key,
+    ));
+
+    return valuesMap;
   }
 }
 

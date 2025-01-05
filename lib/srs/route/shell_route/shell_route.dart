@@ -73,9 +73,14 @@ class ShellRoute extends HyperRoute<ShellValue> {
     required ShellValue value,
     Completer? popCompleter,
   }) {
+    if (next == null) {
+      throw HyperError(
+        "Attempt to navigate to [ShellRoute] directly. ([next] is null).",
+      );
+    }
     return ShellNode(
       shellBuilder: shellBuilder,
-      value: value.withNext(next!),
+      value: value.withNext(next),
       route: this,
       popCompleter: popCompleter,
     );
