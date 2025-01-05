@@ -7,7 +7,7 @@ import 'package:hyper_router/srs/url/url_data.dart';
 import 'package:hyper_router/srs/value/route_key.dart';
 import 'package:hyper_router/srs/value/route_value.dart';
 
-/// {@template shell_covering_route}
+/// {@template ShellCoveringRoute}
 /// The routes located below this one in the routing tree will be displayed on
 /// top (rather than inside the nested navigator) of the [ShellRoute]  with the
 /// corresponding [shellKey].
@@ -16,7 +16,7 @@ import 'package:hyper_router/srs/value/route_value.dart';
 /// navigate to it directly. Must contain at least one child.
 /// {@endtemplate}
 class ShellCoveringRoute extends HyperRoute {
-  /// {@macro shell_covering_route}
+  /// {@macro ShellCoveringRoute}
   ShellCoveringRoute({
     required this.shellKey,
     required super.children,

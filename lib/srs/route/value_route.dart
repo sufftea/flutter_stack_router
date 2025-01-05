@@ -8,6 +8,7 @@ import 'package:hyper_router/srs/url/url_parser.dart';
 import 'package:hyper_router/srs/utils/hyper_iterable_x.dart';
 import 'package:hyper_router/srs/value/route_value.dart';
 
+/// {@template ValueRoute}
 /// Use when you need to pass data to the route. `T` is the type you will use to
 /// navigate to this route and pass data.
 ///
@@ -25,7 +26,9 @@ import 'package:hyper_router/srs/value/route_value.dart';
 ///
 /// If you `enableUrl`, make sure to provide a `urlParser` for serializing the
 /// value.
+/// {@endtemplate}
 class ValueRoute<T extends RouteValue> extends HyperRoute<T> {
+  /// {@macro ValueRoute}
   ValueRoute({
     required this.screenBuilder,
     this.defaultValue,
