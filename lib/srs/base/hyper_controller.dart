@@ -19,6 +19,8 @@ abstract class HyperController {
   /// Works with routes pushed with flutter's Navigator too.
   void pop<T>([T? value]);
 
-  /// The navigation stack
+  /// The current state of the router.
+  /// The state is a linked list of [RouteNode]s. Each [RouteNode] corresponds
+  /// to a [HyperRoute], and stores the value of that route.
   RouteNode get stack;
 }

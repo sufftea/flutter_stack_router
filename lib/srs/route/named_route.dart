@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:hyper_router/srs/url/url_data.dart';
 import 'package:hyper_router/hyper_router.dart';
 
+/// {@template NamedRoute}
+/// A route that can be navigated to by name and doesn't require an
+/// additional value.
+/// {@endtemplate}
 class NamedRoute extends ValueRoute<RouteName> {
+  /// {@macro NamedRoute}
   NamedRoute({
     required Widget Function(BuildContext context) screenBuilder,
     required this.name,
