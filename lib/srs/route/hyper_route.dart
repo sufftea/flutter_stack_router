@@ -57,29 +57,20 @@ abstract class HyperRoute<T extends RouteValue> {
     );
   }
 
-  /// Receives a list of url segments and returns the stack parsed from them.
-  /// The first segment in the list is matched against this route. If it does
-  /// not correspond to this route, returns null.
+  /// Must find a path in this route's subtree that matches the provided url, and return a
+  /// stack ([RouteNode]) corresponding to that path.
   ///
-  /// A segment is a part of the url separated by slashes ('/'). The slashes are
-  /// not included into the segment.
+  /// If no matching path exists, must return null.
+  ///
+  /// When matching the children against the url, the children must be prioritized in the order
+  /// they appear in the [children] list. Use [matchUrl] for that.
   RouteNode? createFromUrl(UrlData url);
 
-  /// Finds a route that matches the url among its children and returns a stack
-  /// created from it.
-  RouteNode? nextNodeFromUrl(UrlData url) {
-    if (url.segments.isEmpty) {
-      return null;
-    }
-
-    final next = HyperRoute.matchUrl(url: url, routes: children);
-    if (next == null) {
-      throw UrlParsingException(url: url);
-    }
-    return next;
-  }
-
-  /// Finds a route that matches the url and creates a stack from it.
+  /// Recurlively creates a stack of routes based on the provided url. If the route tree does
+  /// not conatin a path that matches all the segments of the URL, returns null.
+  ///
+  /// The routes are prioritized according to their order in the `children` list (whichever one
+  /// matches first is returned).
   static RouteNode? matchUrl({
     required UrlData url,
     required List<HyperRoute> routes,
@@ -96,6 +87,19 @@ abstract class HyperRoute<T extends RouteValue> {
     }
 
     return null;
+  }
+
+  /// A helper for [createFromUrl].
+  RouteNode? nextNodeFromUrl(UrlData url) {
+    if (url.segments.isEmpty) {
+      return null;
+    }
+
+    final next = HyperRoute.matchUrl(url: url, routes: children);
+    if (next == null) {
+      throw UrlParsingException(url: url);
+    }
+    return next;
   }
 
   /// Performs depth-first traversal and applies `action` to each child on the way
